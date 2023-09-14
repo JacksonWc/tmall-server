@@ -120,6 +120,7 @@ public class PayController {
 
     // 接收支付宝发送的通知（支付结果）
     // 注意：必须是POST请求
+    //支付成功后支付宝会往notify和finish两个方法发请求
     @ApiIgnore
     @PostMapping("/notify")
     public String payNotify(@ApiIgnore HttpServletRequest request) throws Throwable {
