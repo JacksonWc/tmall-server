@@ -109,7 +109,7 @@ public class PayController {
         AlipayTradePagePayResponse alipayTradePagePayResponse = alipayClient.pageExecute(request);
         if (alipayTradePagePayResponse.isSuccess()) {
             System.out.println("调用成功，将在浏览器中打开支付宝【沙箱】支付页");
-            //直接获取页面的源代码并返回-- alipayTradePagePayResponse.getBody()
+            //直接获取页面的源代码并返回-- alipayTradePagePayResponse.getBody()；响应的就是跳转的支付界面
             String responseBody = alipayTradePagePayResponse.getBody();
             System.out.println(responseBody);
             return responseBody;
