@@ -3,6 +3,15 @@
 
 <mapper namespace="cn.tedu.tmall.admin.mall.dao.persist.mapper.GoodsMapper">
 
+    <!-- int insertBatch(List<Goods> goodsList); -->
+    <insert id="insertBatch" useGeneratedKeys="true" keyProperty="id">
+        INSERT INTO mall_goods (title) values
+        <foreach collection="list" item="goods" separator=",">
+            (#{goods.title})
+        </foreach>
+    </insert>
+
+
     <!--
     //通过商品分类的id查询商品分类名称，联合mall_goods表
     String getCategoryNameByCategoryId(Long categoryId);

@@ -23,4 +23,7 @@ public interface GoodsMapper extends BaseMapper<Goods> {
     GoodsStandardVO getStandardById(Long id);
 
     List<GoodsListItemVO> listByCategory(Long categoryId);
+
+    //批量插入
+    int insertBatch(List<Goods> goodsList);
 }
