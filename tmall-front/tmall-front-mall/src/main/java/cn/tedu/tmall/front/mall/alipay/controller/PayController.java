@@ -150,7 +150,7 @@ public class PayController {
         }
     }
 
-    // 接收处理支付宝的跳转（支付完成后自动重定向到此处）
+    // 接收处理支付宝的跳转（支付完成后自动重定向到此处），就是付款完成之后最终展示的页面内容
     @ApiIgnore
     @GetMapping("/finish")
     public String finish() {
