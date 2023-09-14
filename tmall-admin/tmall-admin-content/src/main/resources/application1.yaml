@@ -1,0 +1,17 @@
+spring:
+  profiles:
+    active: dev
+
+jackson:
+  default-property-inclusion: non_null
+
+server:
+  port: 19181
+
+knife4j:
+  basic:
+    enable: true
+
+
+
+

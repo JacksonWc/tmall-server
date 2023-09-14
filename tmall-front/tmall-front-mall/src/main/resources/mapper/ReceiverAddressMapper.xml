@@ -1,0 +1,68 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.tedu.tmall.front.mall.dao.persist.mapper.ReceiverAddressMapper">
+
+    <!-- ReceiverAddressStandardVO getStandardById(Long id); -->
+    <select id="getStandardById" resultMap="StandardResultMap">
+        SELECT
+            <include refid="StandardQueryFields"/>
+        FROM
+            mall_receiver_address
+        WHERE
+            id=#{id}
+    </select>
+
+    <!-- List<ReceiverAddressListItemVO> listByUser(Long userId); -->
+    <select id="listByUser" resultMap="ListResultMap">
+        SELECT
+            <include refid="ListQueryFields"/>
+        FROM
+            mall_receiver_address
+        WHERE
+            user_id=#{userId}
+        ORDER BY
+            is_default DESC, id DESC
+    </select>
+
+    <sql id="StandardQueryFields">
+        <if test="true">
+            id, user_id, receiver_name, receiver_phone, province,
+            city, area, detail, is_default
+        </if>
+    </sql>
+
+    <resultMap id="StandardResultMap"
+               type="cn.tedu.tmall.front.mall.pojo.vo.ReceiverAddressStandardVO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="area" property="area"/>
+        <result column="detail" property="detail"/>
+        <result column="is_default" property="isDefault"/>
+    </resultMap>
+
+    <sql id="ListQueryFields">
+        <if test="true">
+            id, user_id, receiver_name, receiver_phone, province,
+            city, area, detail, is_default
+        </if>
+    </sql>
+
+    <resultMap id="ListResultMap"
+               type="cn.tedu.tmall.front.mall.pojo.vo.ReceiverAddressListItemVO">
+        <id column="id" property="id"/>
+        <result column="user_id" property="userId"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="province" property="province"/>
+        <result column="city" property="city"/>
+        <result column="area" property="area"/>
+        <result column="detail" property="detail"/>
+        <result column="is_default" property="isDefault"/>
+    </resultMap>
+
+</mapper>

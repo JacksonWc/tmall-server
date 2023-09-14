@@ -1,0 +1,19 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.tedu.tmall.admin.account.dao.persist.mapper.UserMapper">
+
+   <!--
+      //通过角色名称获取管理员列表
+    //select u.id,u.username,u.avatar,u.phone,u.email,u.description,u.enable,u.last_login_ip,u.login_count,u.gmt_last_login
+        //from account_user u join account_user_role mi on u.id=mi.user_id
+        //join account_role r on r.id=mi.role_id where r.name like '%管理员'
+        List<UserListItemVO> ListManager(String name);
+   -->
+    <select id="ListManager" resultType="cn.tedu.tmall.admin.account.pojo.vo.UserListItemVO">
+        select u.id,u.username,u.avatar,u.phone,u.email,u.description,u.enable,u.last_login_ip,u.login_count,u.gmt_last_login
+            from account_user u join account_user_role mi on u.id=mi.user_id
+            join account_role r on r.id=mi.role_id where r.name like '%管理员'
+    </select>
+
+</mapper>

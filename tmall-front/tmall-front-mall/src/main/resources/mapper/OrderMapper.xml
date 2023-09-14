@@ -1,0 +1,111 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.tedu.tmall.front.mall.dao.persist.mapper.OrderMapper">
+
+    <!-- OrderStandardVO getStandardByIdAndUser(@Param("orderId") Long orderId, @Param("userId") Long userId); -->
+    <select id="getStandardByIdAndUser" resultMap="StandardResultMap">
+        SELECT
+            <include refid="StandardQueryFields"></include>
+        FROM
+            mall_order
+        LEFT JOIN mall_order_item ON mall_order.id=mall_order_item.order_id
+        WHERE
+            mall_order.id=#{orderId}
+            AND
+            mall_order.buyer_id=#{userId}
+    </select>
+
+    <!-- List<OrderListItemVO> listByUser(Long userId); -->
+    <select id="listByUser" resultMap="ListResultMap">
+        SELECT
+            <include refid="ListQueryFields"></include>
+        FROM
+            mall_order
+        WHERE
+            buyer_id=#{userId}
+        ORDER BY id DESC
+    </select>
+
+    <sql id="StandardQueryFields">
+        <if test="true">
+            mall_order.id,
+            mall_order.order_no,
+            mall_order.receiver_name,
+            mall_order.receiver_phone,
+            mall_order.receiver_address,
+            mall_order.goods_num,
+            mall_order.total_price,
+            mall_order.logistics_no,
+            mall_order.pay_channel,
+            mall_order.pay_method,
+            mall_order.order_state,
+            mall_order.gmt_pay,
+            mall_order_item.id AS order_item_id,
+            mall_order_item.goods_id,
+            mall_order_item.goods_cover_url,
+            mall_order_item.goods_title,
+            mall_order_item.goods_num,
+            mall_order_item.sale_unit_price
+        </if>
+    </sql>
+
+    <resultMap id="StandardResultMap"
+               type="cn.tedu.tmall.front.mall.pojo.vo.OrderStandardVO">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="receiver_address" property="receiverAddress"/>
+        <result column="goods_num" property="goodsNum"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="logistics_no" property="logisticsNo"/>
+        <result column="pay_channel" property="payChannel"/>
+        <result column="pay_method" property="payMethod"/>
+        <result column="order_state" property="orderState"/>
+        <result column="gmt_pay" property="gmtPay"/>
+        <collection property="orderItemList"
+                    ofType="cn.tedu.tmall.front.mall.pojo.vo.OrderItemStandardVO">
+            <id column="order_item_id" property="id"/>
+            <result column="goods_id" property="goodsId"/>
+            <result column="goods_cover_url" property="goodsCoverUrl"/>
+            <result column="goods_title" property="goodsTitle"/>
+            <result column="goods_num" property="goodsNum"/>
+            <result column="sale_unit_price" property="saleUnitPrice"/>
+        </collection>
+    </resultMap>
+
+    <sql id="ListQueryFields">
+        <if test="true">
+            mall_order.id,
+            mall_order.order_no,
+            mall_order.receiver_name,
+            mall_order.receiver_phone,
+            mall_order.receiver_address,
+            mall_order.goods_num,
+            mall_order.total_price,
+            mall_order.logistics_no,
+            mall_order.pay_channel,
+            mall_order.pay_method,
+            mall_order.order_state,
+            mall_order.gmt_pay
+        </if>
+    </sql>
+
+    <resultMap id="ListResultMap"
+               type="cn.tedu.tmall.front.mall.pojo.vo.OrderListItemVO">
+        <id column="id" property="id"/>
+        <result column="order_no" property="orderNo"/>
+        <result column="receiver_name" property="receiverName"/>
+        <result column="receiver_phone" property="receiverPhone"/>
+        <result column="receiver_address" property="receiverAddress"/>
+        <result column="goods_num" property="goodsNum"/>
+        <result column="total_price" property="totalPrice"/>
+        <result column="logistics_no" property="logisticsNo"/>
+        <result column="pay_channel" property="payChannel"/>
+        <result column="pay_method" property="payMethod"/>
+        <result column="order_state" property="orderState"/>
+        <result column="gmt_pay" property="gmtPay"/>
+    </resultMap>
+
+</mapper>

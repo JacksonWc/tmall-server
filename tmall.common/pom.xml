@@ -1,0 +1,63 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project xmlns="http://maven.apache.org/POM/4.0.0" xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:schemaLocation="http://maven.apache.org/POM/4.0.0 https://maven.apache.org/xsd/maven-4.0.0.xsd">
+
+    <!-- 模块版本：相对固定的值 -->
+    <modelVersion>4.0.0</modelVersion>
+
+
+    <!-- 子级项目，子项目中最最重要的要配的东西 -->
+    <parent>
+        <groupId>cn.tedu</groupId>
+        <artifactId>tmall-server</artifactId>
+        <version>0.0.1-SNAPSHOT</version>
+        <relativePath/> <!-- lookup parent from repository -->
+    </parent>
+
+
+
+    <!-- 当前项目的配置 -->
+    <artifactId>tmall_common</artifactId>
+
+
+    <!-- 当前项目中使用到的依赖项 -->
+    <dependencies>
+
+        <!-- lombok -->
+        <dependency>
+            <groupId>org.projectlombok</groupId>
+            <artifactId>lombok</artifactId>
+            <optional>true</optional>
+            <version>1.18.28</version>
+        </dependency>
+
+        <!-- Knife4j Spring Boot：在线API文档 -->
+        <dependency>
+            <groupId>com.github.xiaoymin</groupId>
+            <artifactId>knife4j-spring-boot-starter</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- JJWT（Java JWT） -->
+        <dependency>
+            <groupId>io.jsonwebtoken</groupId>
+            <artifactId>jjwt</artifactId>
+            <scope>provided</scope>
+        </dependency>
+
+        <!-- 基于MyBatis或MyBatis Plus的分页查询框架 -->
+        <dependency>
+            <groupId>com.github.pagehelper</groupId>
+            <artifactId>pagehelper-spring-boot-starter</artifactId>
+            <scope>provided</scope>
+        </dependency>
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-test</artifactId>
+            <scope>test</scope>
+        </dependency>
+    </dependencies>
+
+    
+
+</project>

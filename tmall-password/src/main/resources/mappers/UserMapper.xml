@@ -1,0 +1,58 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+
+<mapper namespace="cn.tedu.tmall.passport.dao.persist.mapper.UserMapper">
+
+    <!-- UserLoginInfoVO getLoginInfoByUsername(String username);
+     select account_user.id,account_user.username,account_user.password,account_user.enable,account_permission.value from account_user
+    left join account_user_role on account_user.id=account_user_role.user_id
+    left join account_role_permission on account_user_role.id=account_role_permission.role_id
+    left join account_permission on account_permission.id=account_role_permission.permission_id
+    where username='root';
+     -->
+    <select id="getLoginInfoByUsername" resultMap="LoginInfoResultMap">
+        SELECT
+            account_user.id,
+            account_user.username,
+            account_user.password,
+            account_user.avatar,
+            account_user.login_count,
+            account_user.enable,
+            account_permission.value
+        FROM
+            account_user
+                LEFT JOIN account_user_role ON account_user.id = account_user_role.user_id
+                LEFT JOIN account_role_permission ON account_user_role.role_id = account_role_permission.role_id
+                LEFT JOIN account_permission ON account_role_permission.permission_id = account_permission.id
+        WHERE
+            username = #{username}
+    </select>
+
+    <!-- resultMap标签：指导MyBaits将查询结果封装到对象中 -->
+    <!-- resultMap标签的id属性：自定义名称，与select标签的resultMap属性值对应 -->
+    <!-- resultMap标签的type属性：用于封装查询结果的类的全限定名 -->
+    <!-- resultMap标签子级的id标签：用于配置主键的列与属性名的对应关系 -->
+    <!-- resultMap标签子级的result标签：用于配置”非主键“的列与属性名的对应关系 -->
+    <!-- resultMap标签子级的id标签的column属性：查询结果集中的列名 -->
+    <!-- resultMap标签子级的id标签的property属性：封装查询结果的类中的属性名 -->
+    <!-- resultMap标签子级的collection标签：配置1对多的查询时的属性 -->
+    <!-- resultMap标签子级的collection标签的property属性：封装查询结果的类中的属性名 -->
+    <!-- resultMap标签子级的collection标签的ofType属性：List中的元素类型的全限定名 -->
+    <!-- resultMap标签子级的collection标签的子级：如何创建出List中的每个元素对象 -->
+    <resultMap id="LoginInfoResultMap"
+               type="cn.tedu.tmall.passport.pojo.vo.UserLoginInfoVO">
+        <id column="id" property="id"/>
+        <result column="username" property="username"/>
+        <result column="password" property="password"/>
+        <result column="login_count" property="loginCount"/>
+        <result column="avatar" property="avatar"/>
+        <result column="enable" property="enable"/>
+        <collection property="permissions" ofType="java.lang.String">
+            <constructor>
+                <arg column="value"/>
+            </constructor>
+        </collection>
+    </resultMap>
+
+
+</mapper>
