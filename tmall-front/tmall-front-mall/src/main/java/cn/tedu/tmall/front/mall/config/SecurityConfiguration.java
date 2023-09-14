@@ -79,7 +79,7 @@ public class SecurityConfiguration extends WebSecurityConfigurerAdapter {
                 "/categories/**", // 类别的所有
                 "/goods/**", // 商品的所有
                 "/comments/list-by-goods", // 评论列表
-                "/pay/**" //支付相关
+                "/alipay/**" //支付相关
         };
 
         // 禁用“防止伪造的跨域攻击的防御机制”
