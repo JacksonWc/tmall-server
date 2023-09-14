@@ -87,7 +87,7 @@ public class PayController {
         //电脑网站支付场景固定传值FAST_INSTANT_TRADE_PAY
         bizContent.put("product_code", "FAST_INSTANT_TRADE_PAY");
 
-        /******可选参数******/
+        /******可选参数，过期时间******/
         //bizContent.put("time_expire", "2022-08-01 22:00:00");
 
         //// 商品明细信息，按需传入
