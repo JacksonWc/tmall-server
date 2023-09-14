@@ -78,7 +78,7 @@ public class PayController {
         request.setReturnUrl(RETURN_URL);
         /******必传参数******/
         JSONObject bizContent = new JSONObject();
-        //商户订单号，商家自定义，保持唯一性
+        //商户订单号，商家自定义，保持唯一性;实际是按着out_trade_no这个名字把参数发给支付宝的，所以类中原来定义的参数名是什么不重要
         bizContent.put("out_trade_no", payParam.getOutTradeNo());
         //支付金额，最小值0.01元
         bizContent.put("total_amount", payParam.getTotalAmount());
