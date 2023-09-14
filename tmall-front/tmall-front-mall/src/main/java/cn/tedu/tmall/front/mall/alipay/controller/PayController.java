@@ -39,13 +39,13 @@ public class PayController {
      */
     private static final String ALIPAY_PUBLIC_KEY = "MIIBIjANBgkqhkiG9w0BAQEFAAOCAQ8AMIIBCgKCAQEAj82xW5dGoXMnJmfdQvE7NAZzyuFXgwFamBTEdRfYCZkDl2ggmRVZt3CkVlLEoO9wTk4qtN/oqquEe5QaVbnxvJqzUEB5pPAl3rZqH+1c+Ca5BP6WEqMcZvlKaTGqv3THbtED2RaN/HNyZ8q6svMQkCuzQQL9Q6Sg3tjrs05Exbp8xAKXuv6XnI/0qyAesw8h25LOM/m/ez+xbWiVNRn7//iJ8IZPse72czBzyTfqebsu1Iy7PRGIqmjjo3NPMsBBTB13P/85XAHMZ1LnwEdzhw3Tlj6lS+x9zibEeUjLv+Kr+7+GMIXxiQIMx5QoibJJcA1unFNsno7QAkcEQ63EtQIDAQAB";
     /**
-     * 通知网址，用于处理支付宝完成支付处理后，你的应用中进行下一步处理的请求地址
+     * 通知网址，用于处理支付宝完成支付处理后，你的应用中进行下一步处理的请求地址，就是穿透的forwarding地址
      */
-    private static final String NOTIFY_URL = "http://ac7s4d.natappfree.cc/alipay/notify";
+    private static final String NOTIFY_URL = "http://vevmej.natappfree.cc/alipay/notify";
     /**
      * 返回网址，用于支付宝完成支付处理后，重定向到某个位置
      */
-    private static final String RETURN_URL = "http://ac7s4d.natappfree.cc/alipay/finish";
+    private static final String RETURN_URL = "http://vevmej.natappfree.cc/alipay/finish";
     /**
      * 【固定】支付宝网关
      */
