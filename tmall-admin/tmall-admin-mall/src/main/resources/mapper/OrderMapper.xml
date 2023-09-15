@@ -17,7 +17,9 @@
             )
     </update>
 
-    <!-- List<Long> listOvertimeUnpaidIdList(int overtimeInMinute) -->
+    <!-- List<Long> listOvertimeUnpaidIdList(int overtimeInMinute)
+    在myabtis的xml中如何实现比较两个时间的大小 gmt_create &lt; DATE_SUB(NOW(), INTERVAL #{overtimeInMinute} MINUTE)
+    -->
     <select id="listOvertimeUnpaidIdList" resultType="Long">
         SELECT
             id
