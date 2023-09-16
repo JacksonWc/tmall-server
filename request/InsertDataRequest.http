@@ -1,0 +1,102 @@
+### 查看索引的基本状态，能看到各个字段的类型
+GET http://localhost:9200/index_search
+
+### 查看索引中的所有文档
+GET http://localhost:9200/index_search/_search
+
+### 删除索引
+DELETE http://localhost:9200/index_search
+
+### 创建索引
+PUT http://localhost:9200/index_search
+Content-Type: application/json
+
+{
+	"mappings": {
+		"properties": {
+			"id": {
+				"type": "long"
+        	},
+			"category": {
+				"type": "keyword"
+        	},
+			"title": {
+				"type": "text"
+        	},
+        	"brief": {
+				"type": "text"
+        	},
+			"sort": {
+				"type": "integer"
+        	},
+			"price": {
+				"type": "integer"
+        	}
+        }
+	}
+}
+
+### 添加测试数据文档-1（自定义ID值）
+PUT http://localhost:9200/index_search/_doc/1
+Content-Type: application/json
+
+{
+  "id": 1,
+  "category": "绿茶",
+  "title": "2023年明前特级信阳毛尖绿茶 250克（125g*2罐）",
+  "brief": "细、圆、紧、直 鲜爽持久",
+  "sort": 150,
+  "price": 668
+}
+
+### 添加测试数据文档-2（自定义ID值）
+PUT http://localhost:9200/index_search/_doc/2
+Content-Type: application/json
+
+{
+  "id": 2,
+  "category": "绿茶",
+  "title": "2023年西湖龙井新茶 传统纸包 明前一级绿茶 200克",
+  "brief": "甄选清香、带豆花香",
+  "sort": 180,
+  "price": 386
+}
+
+### 添加测试数据文档-3（自定义ID值）
+PUT http://localhost:9200/index_search/_doc/3
+Content-Type: application/json
+
+{
+  "id": 3,
+  "category": "红茶",
+  "title": "2023年经典58红茶 浓香型大叶种滇红茶 380克",
+  "brief": "香甜醇爽 温润滑顺",
+  "sort": 120,
+  "price": 579
+}
+
+### 添加测试数据文档-4（自定义ID值）
+PUT http://localhost:9200/index_search/_doc/4
+Content-Type: application/json
+
+{
+  "id": 4,
+  "category": "红茶",
+  "title": "2023年金骏眉武夷红茶 桐木村高山特级红茶 80克",
+  "brief": "甘醇甜滑 滋味绵软 蜜薯香馥",
+  "sort": 110,
+  "price": 866
+}
+
+### 添加测试数据文档-5（自定义ID值）
+PUT http://localhost:9200/index_search/_doc/5
+Content-Type: application/json
+
+{
+  "id": 5,
+  "category": "茶具",
+  "title": "陶瓷旅行茶具 便携式快客杯功夫茶具 一壶二杯（泡茶容量约170ml左右）",
+  "brief": "一壶二杯 简约礼盒装",
+  "sort": 120,
+  "price": 632
+}

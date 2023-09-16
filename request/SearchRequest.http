@@ -1,0 +1,2 @@
+### 简单搜索
+GET http://localhost:9200/index_search/_search?q=category:绿茶
