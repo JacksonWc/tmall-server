@@ -1,0 +1,33 @@
+### 简单的分词
+GET http://localhost:9200/_analyze
+Content-Type: application/json
+
+{
+  "text": "nice to meet you."
+}
+
+### 简单的分词（中文）
+GET http://localhost:9200/_analyze
+Content-Type: application/json
+
+{
+  "text": "今天的天气真不错！"
+}
+
+### 中文分词：ik_smart（智能）
+GET http://localhost:9200/_analyze
+Content-Type: application/json
+
+{
+  "analyzer": "ik_smart",
+  "text": "今天的天气真不错！"
+}
+
+### 中文分词：ik_max_word（最大词量，也称之最细粒度）
+GET http://localhost:9200/_analyze
+Content-Type: application/json
+
+{
+  "analyzer": "ik_max_word",
+  "text": "今天的天气真不错！"
+}

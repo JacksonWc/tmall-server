@@ -1,0 +1,7 @@
+### 测试访问Elasticsearch
+GET http://localhost:9200
+
+### 查看Elasticsearch的状态
+GET http://localhost:9200/_cat/indices/?v
+
+### 
