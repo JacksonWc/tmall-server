@@ -1,0 +1,25 @@
+### 添加文档（分配随机ID）
+POST http://localhost:9200/index_curd/_doc
+Content-Type: application/json
+
+{
+  "username": "zhangsan",
+  "password": "123456",
+  "enable": 0
+}
+
+### 添加文档（自定义ID值）
+PUT http://localhost:9200/index_curd/_doc/9527
+Content-Type: application/json
+
+{
+  "username": "lisi",
+  "password": "123456",
+  "enable": 0
+}
+
+### 查看索引中的所有文档
+GET http://localhost:9200/index_curd/_search
+
+### 根据ID查看文档
+GET http://localhost:9200/index_curd/_doc/9527
