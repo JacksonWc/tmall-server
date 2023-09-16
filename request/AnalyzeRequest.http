@@ -37,6 +37,6 @@ GET http://localhost:9200/_analyze
 Content-Type: application/json
 
 {
-  "analyzer": "ik_max_word",
+  "analyzer": "ik_smart",
   "text": "这个分词插件真的太奥利给了！"
 }
