@@ -31,3 +31,12 @@ Content-Type: application/json
   "analyzer": "ik_max_word",
   "text": "今天的天气真不错！"
 }
+
+### 中文分词：自造词，需要在ik分词器文件夹下的config下进行配置，详见笔记
+GET http://localhost:9200/_analyze
+Content-Type: application/json
+
+{
+  "analyzer": "ik_max_word",
+  "text": "这个分词插件真的太奥利给了！"
+}
