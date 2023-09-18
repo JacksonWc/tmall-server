@@ -98,11 +98,13 @@ public class GoodsSearchPO implements Serializable {
     /**
      * 数据创建时间
      */
+    @Field(type = FieldType.Date, format = {}, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtCreate;
 
     /**
      * 数据最后修改时间
      */
+    @Field(type = FieldType.Date, format = {}, pattern = "yyyy-MM-dd HH:mm:ss")
     private LocalDateTime gmtModified;
 
 }
