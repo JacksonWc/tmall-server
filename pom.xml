@@ -68,6 +68,13 @@
                 <version>${tmall.version}</version>
             </dependency>
 
+            <!-- Spring Boot支持AOP编程的依赖项 -->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-aop</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
             <!-- 支付宝SDK -->
             <!-- https://central.sonatype.com/artifact/com.alipay.sdk/alipay-sdk-java?smo=true -->
             <dependency>
