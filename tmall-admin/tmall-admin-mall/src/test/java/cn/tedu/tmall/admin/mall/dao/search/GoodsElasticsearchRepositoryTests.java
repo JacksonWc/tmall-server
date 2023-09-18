@@ -7,6 +7,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
 import org.springframework.data.domain.PageRequest;
 import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.SearchHit;
 import org.springframework.data.elasticsearch.core.SearchHits;
 import org.springframework.data.elasticsearch.core.SearchPage;
 
@@ -64,5 +65,29 @@ public class GoodsElasticsearchRepositoryTests {
         System.out.println("list.getNumber() >>> " + searchPage.getNumber());
         System.out.println("list.getSize() >>> " + searchPage.getSize());
     }
+
+    @Test
+    void customSearch() {
+        String str = "绿茶";
+        Pageable pageable = PageRequest.of(0, 20);
+        SearchPage<GoodsSearchPO> searchPage = repository.customSearch(str, pageable);
+        SearchHits<GoodsSearchPO> searchHits = searchPage.getSearchHits();
+
+        System.out.println("list.getTotalPages() >>> " + searchPage.getTotalPages());
+        System.out.println("list.getNumber() >>> " + searchPage.getNumber());
+        System.out.println("list.getSize() >>> " + searchPage.getSize());
+        System.out.println("searchHits.getTotalHits() >>> " + searchHits.getTotalHits());
+
+        for (SearchHit<GoodsSearchPO> searchHit : searchHits) {
+            GoodsSearchPO goodsSearchPO = searchHit.getContent();
+            List<String> highlightFields = searchHit.getHighlightField("title");
+            if (highlightFields.size() > 0) {
+                String s = highlightFields.get(0);
+                goodsSearchPO.setTitle(s);
+            }
+            System.out.println(goodsSearchPO);
+        }
+    }
+
 
 }

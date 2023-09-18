@@ -9,3 +9,41 @@ GET http://localhost:9200/mall_goods/_search
 
 ### 查看数据
 GET http://localhost:9200/mall_goods/_doc/999
+
+### 指定条件的搜索：复合条件，其中，must >>> AND / should >>> OR / must_not >>> !=
+GET http://localhost:9200/mall_goods/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "match": {
+            "categoryName": "绿茶"
+          }
+        },
+        {
+          "match": {
+            "barCode": "绿茶"
+          }
+        },
+        {
+          "match": {
+            "title": "绿茶"
+          }
+        },
+        {
+          "match": {
+            "brief": "绿茶"
+          }
+        },
+        {
+          "match": {
+            "keyword": "绿茶"
+          }
+        }
+      ]
+    }
+  }
+}
