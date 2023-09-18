@@ -1,0 +1,11 @@
+### 查看索引的基本状态
+GET http://localhost:9200/mall_goods
+
+### 删除索引
+DELETE http://localhost:9200/mall_goods
+
+### 查看索引中的所有文档
+GET http://localhost:9200/mall_goods/_search
+
+### 查看数据
+GET http://localhost:9200/mall_goods/_doc/999
