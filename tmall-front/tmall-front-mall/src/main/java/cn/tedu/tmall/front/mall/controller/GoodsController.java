@@ -5,6 +5,7 @@ package cn.tedu.tmall.front.mall.controller;
 import cn.tedu.tmall.common.vo.PageData;
 import cn.tedu.tmall.common.web.JsonResult;
 import cn.tedu.tmall.front.mall.pojo.vo.GoodsListItemVO;
+import cn.tedu.tmall.front.mall.pojo.vo.GoodsSearchVO;
 import cn.tedu.tmall.front.mall.pojo.vo.GoodsStandardVO;
 import cn.tedu.tmall.front.mall.service.IGoodsService;
 import com.github.xiaoymin.knife4j.annotations.ApiOperationSupport;
@@ -20,6 +21,8 @@ import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RestController;
+
+import javax.validation.constraints.Pattern;
 
 /**
  * 处理商品相关请求的控制器类
@@ -79,6 +82,22 @@ public class GoodsController {
         log.debug("开始处理【根据类别查询商品列表】的请求，父级商品：{}，页码：{}", categoryId, page);
         Integer pageNum = page == null ? 1 : page;
         PageData<GoodsListItemVO> pageData = goodsService.listByCategory(categoryId, pageNum);
+        return JsonResult.ok(pageData);
+    }
+
+
+    @GetMapping("/search")
+    @ApiOperation("搜索商品")
+    @ApiOperationSupport(order = 500)
+    @ApiImplicitParams({
+            @ApiImplicitParam(name = "keyword", value = "关键词", required = true, paramType = "query", dataType = "string"),
+            @ApiImplicitParam(name = "page", value = "页码", defaultValue = "1", paramType = "query", dataType = "int")
+    })
+    public JsonResult search(@Pattern(regexp = "^(?! )\\S{1,20}(?<! )$", message = "关键词必须是1~20个字符，且首尾不可以是空格！") String keyword,
+                             @Range(min = 1, message = "请提交有效的页码值！") Integer page) {
+        log.debug("开始处理【搜索商品】的请求，关键词：{}，页码：{}", keyword, page);
+        Integer pageNum = page == null ? 1 : page;
+        PageData<GoodsSearchVO> pageData = goodsService.search(keyword, pageNum);
         return JsonResult.ok(pageData);
     }
 
