@@ -5,6 +5,7 @@ import cn.tedu.tmall.admin.mall.dao.persist.repository.IGoodsRepository;
 import cn.tedu.tmall.admin.mall.pojo.entity.Goods;
 import cn.tedu.tmall.admin.mall.pojo.vo.GoodsListItemVO;
 import cn.tedu.tmall.admin.mall.pojo.vo.GoodsStandardVO;
+import cn.tedu.tmall.common.po.GoodsSearchPO;
 import cn.tedu.tmall.common.util.PageInfoToPageDataConverter;
 import cn.tedu.tmall.common.vo.PageData;
 import com.github.pagehelper.PageHelper;
@@ -44,6 +45,7 @@ public class GoodsRepositoryImpl implements IGoodsRepository {
         return PageInfoToPageDataConverter.convert(pageInfo);
     }
 
+    //这个居然写了2个一样的
     @Override
     public int insert(Goods goods) {
         return goodsMapper.insert(goods);
@@ -61,6 +63,15 @@ public class GoodsRepositoryImpl implements IGoodsRepository {
         PageHelper.startPage(pageNum, pageSize);
         List<GoodsListItemVO> list = goodsMapper.listByCategory(categoryId);
         PageInfo<GoodsListItemVO> pageInfo = new PageInfo<>(list);
+        return PageInfoToPageDataConverter.convert(pageInfo);
+    }
+
+    @Override
+    public PageData<GoodsSearchPO> listSearch(Integer pageNum, Integer pageSize) {
+        log.debug("开始执行【查询用于搜索的商品列表】的数据访问，页码：{}，每页记录数：{}", pageNum, pageSize);
+        PageHelper.startPage(pageNum, pageSize);
+        List<GoodsSearchPO> list = goodsMapper.listSearch();
+        PageInfo<GoodsSearchPO> pageInfo = new PageInfo<>(list);
         return PageInfoToPageDataConverter.convert(pageInfo);
     }
 

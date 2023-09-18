@@ -4,6 +4,7 @@ import cn.tedu.tmall.admin.mall.dao.persist.mapper.GoodsMapper;
 import cn.tedu.tmall.admin.mall.pojo.entity.Goods;
 import cn.tedu.tmall.admin.mall.pojo.vo.GoodsListItemVO;
 import cn.tedu.tmall.admin.mall.pojo.vo.GoodsStandardVO;
+import cn.tedu.tmall.common.po.GoodsSearchPO;
 import cn.tedu.tmall.common.vo.PageData;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Repository;
@@ -23,4 +24,6 @@ public interface IGoodsRepository {
     GoodsStandardVO getStandardById(Long id);
 
     PageData<GoodsListItemVO> listByCategory(Long categoryId, Integer pageNum, Integer defaultQueryPageSize);
+
+    PageData<GoodsSearchPO> listSearch(Integer pageNum, Integer pageSize);
 }

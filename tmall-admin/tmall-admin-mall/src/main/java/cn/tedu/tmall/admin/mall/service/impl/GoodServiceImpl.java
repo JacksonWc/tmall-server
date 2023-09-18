@@ -4,6 +4,7 @@ import cn.tedu.tmall.admin.mall.dao.persist.repository.ICategoryRepository;
 import cn.tedu.tmall.admin.mall.dao.persist.repository.IGoodsDetailRepository;
 import cn.tedu.tmall.admin.mall.dao.persist.repository.IGoodsRepository;
 import cn.tedu.tmall.admin.mall.dao.persist.repository.impl.GoodsRepositoryImpl;
+import cn.tedu.tmall.admin.mall.dao.search.IGoodsSearchRepository;
 import cn.tedu.tmall.admin.mall.pojo.entity.Goods;
 import cn.tedu.tmall.admin.mall.pojo.entity.GoodsDetail;
 import cn.tedu.tmall.admin.mall.pojo.param.GoodsAddNewParam;
@@ -15,6 +16,7 @@ import cn.tedu.tmall.admin.mall.service.IGoodsService;
 import cn.tedu.tmall.common.authentication.CurrentPrincipal;
 import cn.tedu.tmall.common.enumerator.ServiceCode;
 import cn.tedu.tmall.common.ex.ServiceException;
+import cn.tedu.tmall.common.po.GoodsSearchPO;
 import cn.tedu.tmall.common.vo.PageData;
 import lombok.extern.slf4j.Slf4j;
 import org.springframework.beans.BeanUtils;
@@ -31,6 +33,8 @@ public class GoodServiceImpl implements IGoodsService {
     ICategoryRepository categoryRepository;
     @Autowired
     IGoodsDetailRepository goodsDetailRepository;
+    @Autowired
+    private IGoodsSearchRepository goodsSearchRepository;
 
     @Value("${tmall.dao.default-query-page-size}")
     private Integer defaultQueryPageSize;
@@ -145,6 +149,23 @@ public class GoodServiceImpl implements IGoodsService {
     public PageData<GoodsListItemVO> listByCategory(Long categoryId, Integer pageNum) {
         log.debug("开始处理【根据类别查询商品列表】的业务，商品类别：{}, 页码：{}", categoryId, pageNum);
         return goodsRepository.listByCategory(categoryId, pageNum, defaultQueryPageSize);
+    }
+
+    @Override
+    public void rebuildSearch() {
+        log.debug("开始处理【重建商品的搜索数据】的业务");
+        //这是为了保证数据一致性要做的事情
+        goodsSearchRepository.deleteAll();
+        Integer pageNum = 1;
+        Integer pageSize = 3;
+        Integer maxPage;
+        PageData<GoodsSearchPO> pageData;
+        do {
+            pageData = goodsRepository.listSearch(pageNum, pageSize);
+            maxPage = pageData.getMaxPage();
+            goodsSearchRepository.saveAll(pageData.getList());
+            pageNum++;
+        } while (pageNum <= maxPage);
     }
 
 

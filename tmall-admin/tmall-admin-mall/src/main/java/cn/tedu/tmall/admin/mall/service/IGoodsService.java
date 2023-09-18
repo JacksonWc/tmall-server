@@ -18,4 +18,9 @@ public interface IGoodsService {
     GoodsStandardVO getStandardById(Long id);
 
     PageData<GoodsListItemVO> listByCategory(Long categoryId, Integer pageNum);
+
+    /**
+     * 重建商品的搜索数据（更新ES中的商品数据）
+     */
+    void rebuildSearch();
 }
