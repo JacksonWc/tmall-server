@@ -2,7 +2,9 @@ package cn.tedu.tmall.admin.mall.dao.search;
 
 
 import cn.tedu.tmall.common.po.GoodsSearchPO;
+import org.springframework.data.domain.Pageable;
 import org.springframework.data.elasticsearch.annotations.Query;
+import org.springframework.data.elasticsearch.core.SearchPage;
 import org.springframework.data.elasticsearch.repository.ElasticsearchRepository;
 import org.springframework.data.repository.CrudRepository;
 import org.springframework.stereotype.Repository;
@@ -35,5 +37,12 @@ public interface GoodsElasticsearchRepository
             "  }")
         // findByTitleOrBrief(String title, String brief);
     List<GoodsSearchPO> test(String x);
+
+    @Query("{\n" +
+            "    \"match\": {\n" +
+            "      \"title\": \"?0\"\n" +
+            "    }\n" +
+            "  }")
+    SearchPage<GoodsSearchPO> testPage(String x, Pageable pageable);
 
 }

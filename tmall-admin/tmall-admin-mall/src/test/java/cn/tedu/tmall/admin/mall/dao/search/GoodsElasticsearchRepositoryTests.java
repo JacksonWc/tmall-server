@@ -5,6 +5,10 @@ import cn.tedu.tmall.common.po.GoodsSearchPO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.boot.test.context.SpringBootTest;
+import org.springframework.data.domain.PageRequest;
+import org.springframework.data.domain.Pageable;
+import org.springframework.data.elasticsearch.core.SearchHits;
+import org.springframework.data.elasticsearch.core.SearchPage;
 
 import java.util.List;
 
@@ -43,6 +47,22 @@ public class GoodsElasticsearchRepositoryTests {
         for (GoodsSearchPO goodsSearchPO : list) {
             System.out.println(goodsSearchPO);
         }
+    }
+
+
+    // 14,12,10,2,1,15
+    @Test
+    void testPage() {
+        String str = "绿茶";
+        Pageable pageable = PageRequest.of(1, 3);
+        SearchPage<GoodsSearchPO> searchPage = repository.testPage(str, pageable);
+        SearchHits<GoodsSearchPO> searchHits = searchPage.getSearchHits();
+        long totalHits = searchHits.getTotalHits();
+        System.out.println("list.getContent() >>> " + searchPage.getContent());
+        System.out.println("totalHits >>> " + totalHits);
+        System.out.println("list.getTotalPages() >>> " + searchPage.getTotalPages());
+        System.out.println("list.getNumber() >>> " + searchPage.getNumber());
+        System.out.println("list.getSize() >>> " + searchPage.getSize());
     }
 
 }
