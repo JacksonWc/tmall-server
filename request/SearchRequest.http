@@ -1,2 +1,115 @@
 ### 简单搜索
 GET http://localhost:9200/index_search/_search?q=category:绿茶
+
+### 自定义搜索：单一条件
+GET http://localhost:9200/index_search/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "title": "绿茶"
+    }
+  }
+}
+
+### 自定义搜索：查询所有
+GET http://localhost:9200/index_search/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_all": {}
+  }
+}
+
+### 指定条件的搜索：复合条件，其中，must >>> AND / should >>> OR / must_not >>> !=
+GET http://localhost:9200/index_search/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "bool": {
+      "should": [
+        {
+          "match": {
+            "title": "绿茶"
+          }
+        },
+        {
+          "match": {
+            "brief": "清香"
+          }
+        }
+      ]
+    }
+  }
+}
+
+### 指定搜索结果的字段列表
+GET http://localhost:9200/index_search/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_all": {}
+  },
+  "_source": [
+    "title",
+    "price"
+  ]
+}
+
+### 指定搜索结果的排序规则
+GET http://localhost:9200/index_search/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_all": {}
+  },
+  "sort": [
+    {
+      "sort": {
+        "order": "desc"
+      }
+    },
+    {
+      "price": {
+        "order": "desc"
+      }
+    }
+  ]
+}
+
+
+### 对搜索结果进行分页,total的value为什么是5
+GET http://localhost:9200/index_search/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match_all": {}
+  },
+ "from": 2,
+  "size": 2
+}
+
+### 在搜索结果中高亮显示关键字
+GET http://localhost:9200/index_search/_search
+Content-Type: application/json
+
+{
+  "query": {
+    "match": {
+      "title": "绿茶"
+    }
+  },
+  "highlight": {
+    "fields": {
+      "title": {}
+    },
+    "pre_tags": "<font style='color: red;'>",
+    "post_tags": "</font>"
+  }
+}

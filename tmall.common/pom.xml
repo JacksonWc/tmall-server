@@ -45,6 +45,12 @@
             <scope>provided</scope>
         </dependency>
 
+        <!-- Spring Boot支持Elasticsearch编程的依赖项-->
+        <dependency>
+            <groupId>org.springframework.boot</groupId>
+            <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+        </dependency>
+
         <!-- 基于MyBatis或MyBatis Plus的分页查询框架 -->
         <dependency>
             <groupId>com.github.pagehelper</groupId>

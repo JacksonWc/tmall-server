@@ -103,6 +103,13 @@
                 <version>${knife4j-spring-boot.version}</version>
             </dependency>
 
+            <!-- Spring Boot支持Elasticsearch编程的依赖项-->
+            <dependency>
+                <groupId>org.springframework.boot</groupId>
+                <artifactId>spring-boot-starter-data-elasticsearch</artifactId>
+                <version>${spring-boot.version}</version>
+            </dependency>
+
             <!-- Spring Boot测试的依赖项 -->
             <dependency>
                 <groupId>org.springframework.boot</groupId>
