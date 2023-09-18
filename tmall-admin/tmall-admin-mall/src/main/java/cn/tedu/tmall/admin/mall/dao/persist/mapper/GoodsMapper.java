@@ -5,6 +5,7 @@ import cn.tedu.tmall.admin.mall.pojo.vo.CategoryListItemVO;
 import cn.tedu.tmall.admin.mall.pojo.vo.CategoryStandardVO;
 import cn.tedu.tmall.admin.mall.pojo.vo.GoodsListItemVO;
 import cn.tedu.tmall.admin.mall.pojo.vo.GoodsStandardVO;
+import cn.tedu.tmall.common.po.GoodsSearchPO;
 import com.baomidou.mybatisplus.core.mapper.BaseMapper;
 import org.springframework.stereotype.Repository;
 
@@ -26,4 +27,11 @@ public interface GoodsMapper extends BaseMapper<Goods> {
 
     //批量插入
     int insertBatch(List<Goods> goodsList);
+
+    /**
+     * 查询用于搜索的商品数据列表，此搜索结果将用于写入到ES中
+     *
+     * @return 商品数据列表
+     */
+    List<GoodsSearchPO> listSearch();
 }

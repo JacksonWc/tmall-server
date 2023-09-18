@@ -145,4 +145,46 @@
         <result column="negative_comment_count" property="negativeCommentCount"/>
     </resultMap>
 
+
+    <!-- List<GoodsSearchVO> listSearch(); -->
+    <select id="listSearch" resultMap="SearchResultMap">
+        SELECT
+        <include refid="SearchQueryFields"/>
+        FROM
+        mall_goods
+        WHERE
+        check_state=1
+        ORDER BY
+        sort DESC, id DESC
+    </select>
+
+    <sql id="SearchQueryFields">
+        <if test="true">
+            id, category_id, category_name, bar_code, title,
+            brief, cover_url, sale_price, keywords, sort,
+            is_recommend, sales_count, comment_count, positive_comment_count, gmt_create,
+            gmt_modified
+        </if>
+    </sql>
+
+    <resultMap id="SearchResultMap"
+               type="cn.tedu.tmall.common.po.GoodsSearchPO">
+        <id column="id" property="id"/>
+        <result column="category_id" property="categoryId"/>
+        <result column="category_name" property="categoryName"/>
+        <result column="bar_code" property="barCode"/>
+        <result column="title" property="title"/>
+        <result column="brief" property="brief"/>
+        <result column="cover_url" property="coverUrl"/>
+        <result column="sale_price" property="salePrice"/>
+        <result column="keywords" property="keywords"/>
+        <result column="sort" property="sort"/>
+        <result column="is_recommend" property="isRecommend"/>
+        <result column="sales_count" property="salesCount"/>
+        <result column="comment_count" property="commentCount"/>
+        <result column="positive_comment_count" property="positiveCommentCount"/>
+        <result column="gmt_create" property="gmtCreate"/>
+        <result column="gmt_modified" property="gmtModified"/>
+    </resultMap>
+
 </mapper>

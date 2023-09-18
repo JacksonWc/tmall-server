@@ -1,5 +1,6 @@
 package cn.tedu.tmall.admin.mall.dao.search;
 
+import cn.tedu.tmall.admin.mall.dao.persist.mapper.GoodsMapper;
 import cn.tedu.tmall.common.po.GoodsSearchPO;
 import org.junit.jupiter.api.Test;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -12,6 +13,15 @@ public class GoodsElasticsearchRepositoryTests {
 
     @Autowired
     GoodsElasticsearchRepository repository;
+
+    @Autowired
+    GoodsMapper goodsMapper;
+
+    @Test
+    void initData() {
+        List<GoodsSearchPO> list = goodsMapper.listSearch();
+        repository.saveAll(list);
+    }
 
     @Test
     void save() {
